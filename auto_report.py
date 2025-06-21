@@ -9,14 +9,18 @@ load_dotenv()
 
 SECRET = os.getenv("JWT_SECRET", "your_jwt_secret")
 
+
 def get_connection():
+    
     return psycopg2.connect(
         dbname=os.getenv("POSTGRES_DB"),
         user=os.getenv("POSTGRES_USER"),
         password=os.getenv("POSTGRES_PASSWORD"),
-        host=os.getenv("POSTGRES_HOST"),
-        port=os.getenv("POSTGRES_PORT")
+        host=os.getenv("POSTGRES_HOST"),  # no DNS force
+        port=os.getenv("POSTGRES_PORT"),
+        sslmode="require"
     )
+
 
 def auto_generate_and_get_reports_from_token(token: str, express_url: str):
     try:

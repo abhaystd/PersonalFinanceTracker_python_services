@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from suggestion_engine import generate_suggestions
-from auto_report import auto_generate_and_get_reports_from_token
+from auto_report import auto_generate_and_get_reports_from_token, get_connection
 import os
 
 
@@ -12,6 +12,16 @@ CORS(app)
 @app.route('/health', methods=['GET'])
 def health_check():
     return jsonify({"status": "ok", "message": "server is healthy"}), 200
+
+@app.get("/db-health")
+def db_health():
+    try:
+        conn = get_connection()
+        conn.close()
+        return {"status": "ok"}
+    except Exception as e:
+        return {"status": "fail", "error": str(e)}
+
 
 
 @app.route('/suggestions', methods=['POST'])
