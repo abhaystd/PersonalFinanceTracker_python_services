@@ -1,4 +1,3 @@
-
 # Personal Finance Tracker+
 
 A full-stack web application that helps users manage expenses, set monthly budgets, view dashboards, and receive smart suggestions to improve financial habits.
@@ -85,7 +84,8 @@ PORT=5000
 
 ### `.env.local` (frontend)
 ```env
-NEXT_PUBLIC_API_BASE=http://localhost:5000/api
+NEXT_PUBLIC_API_BASE=http://localhost:5000
+NEXT_PUBLIC_ANALYTICS=http://localhost:5001
 ```
 
 ### `python-service` require .env 
